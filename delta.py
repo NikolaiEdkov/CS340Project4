@@ -52,7 +52,7 @@ def delta_debugging(func, part:list, req:list, *args, **kwargs):
 if __name__ == "__main__":
     # creating arguement parser
     parser = argparse.ArgumentParser()
-    parser.add_argument("set", type=int, nargs="+", help="set of interest")
+    parser.add_argument("set_size", type=int, help="size of set of interest")
     parser.add_argument("command", help="command to run")
     parser.add_argument("--verbose", action="store_true", help="show debug message")
 
@@ -93,5 +93,5 @@ if __name__ == "__main__":
             raise Exception(res.stderr)
 
     # run the delta debuggin
-    print(delta_debugging(interest, args.set, []))
+    print(delta_debugging(interest, [i for i in range(args.set_size)], []))
 
