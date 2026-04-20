@@ -2,7 +2,7 @@
 
 # changes file
 CHANGES=$(mktemp)
-for i in $* # $* is a list of all the arguments
+for i in $(printf "%s\n" "$@" | sort -n) # $@ - all positional arguments
 do
     cat patch.$i >> $CHANGES
 done;

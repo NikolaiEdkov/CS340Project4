@@ -77,7 +77,7 @@ if __name__ == "__main__":
         # sorting part (needed for patching)
         part = sorted(part)
 
-        dd_logger.debug(f"Executing `{args.command} {" ".join(map(str, part))}`")
+        dd_logger.debug(f"Executing `{args.command}" + f"{' '.join(map(str, part))}`")
         # executing command
         res = subprocess.run([args.command] + list(map(str, part)))
 
