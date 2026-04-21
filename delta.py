@@ -1,14 +1,14 @@
 import argparse
-import logging
+# import logging
 import subprocess
 import typing
 
 # creating logger 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(levelname)s:%(filename)s:%(message)s'
-)
-dd_logger = logging.getLogger(__name__)
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format='%(levelname)s:%(filename)s:%(message)s'
+# )
+# dd_logger = logging.getLogger(__name__)
 
 def delta_debugging(func, part:list, req:list, *args, **kwargs):
     """
@@ -25,7 +25,7 @@ def delta_debugging(func, part:list, req:list, *args, **kwargs):
     :param **kwargs: extra keyword arguments that func function takes
     :return: return one-minimal interesting set
     """
-    dd_logger.debug(f"dd({part}, required={req})")
+    # dd_logger.debug(f"dd({part}, required={req})")
     n = len(part)
     if n <= 1:
         return part
@@ -59,10 +59,10 @@ if __name__ == "__main__":
     # parse the arguments
     args = parser.parse_args()
 
-    if args.verbose:
-        dd_logger.level = logging.DEBUG
+    # if args.verbose:
+    #     dd_logger.level = logging.DEBUG
     
-    dd_logger.debug(f"Command is: {args.command}")
+    # dd_logger.debug(f"Command is: {args.command}")
 
     # defining interest function
     def interest(part):
@@ -77,11 +77,11 @@ if __name__ == "__main__":
         # sorting part (needed for patching)
         part = sorted(part)
 
-        dd_logger.debug(f"Executing `{args.command}" + f"{' '.join(map(str, part))}`")
+        # dd_logger.debug(f"Executing `{args.command}" + f"{' '.join(map(str, part))}`")
         # executing command
         res = subprocess.run([args.command] + list(map(str, part)))
 
-        dd_logger.debug(f"Return code: {res.returncode}")
+        # dd_logger.debug(f"Return code: {res.returncode}")F
         # checking status code to determine if it is executed correctly.
         if res.returncode == 1 and res.stderr is None:
             return True

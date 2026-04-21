@@ -1,15 +1,13 @@
 #!/bin/bash
 
-# changes file
-CHANGES=$(mktemp)
+# temporary file
+FILE=$(mktemp)
+cp wireworld-original.c $FILE.c
+
 for i in $(printf "%s\n" "$@" | sort -n) # $@ - all positional arguments
 do
-    cat patch.$i >> $CHANGES
+    patch -p0 $FILE.c -s < patch.$i 
 done;
-
-# applying changes in temperaray file
-FILE=$(mktemp)
-cat $CHANGES | patch -p0 wireworld-original.c -o $FILE.c
 
 # compiling file, redirect STDERR and STDOUT into a /dev/null file
 gcc -c $FILE.c -o $FILE.o &> /dev/null
@@ -23,7 +21,6 @@ fi
 
 # deleting temporary files
 rm $FILE*
-rm $CHANGES
 
 exit $EXITCODE
 
