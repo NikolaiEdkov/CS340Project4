@@ -2,6 +2,7 @@ import argparse
 # import logging
 import subprocess
 import typing
+import shlex
 
 # creating logger 
 # logging.basicConfig(
@@ -79,7 +80,7 @@ if __name__ == "__main__":
 
         # dd_logger.debug(f"Executing `{args.command}" + f"{' '.join(map(str, part))}`")
         # executing command
-        res = subprocess.run([args.command] + list(map(str, part)))
+        res = subprocess.run(shlex.split(args.command) + list(map(str, part)))
 
         # dd_logger.debug(f"Return code: {res.returncode}")F
         # checking status code to determine if it is executed correctly.
