@@ -7,8 +7,8 @@ decided to use lists due to higher ease of implementation (partitioning)
 and speed (less operations for partitioning and union). Another fix
 included removing logger (it wasn't getting on with a testing system for
 some reason), as well as parsing the command arguments with
-`shlex.split()` in order to run first token of the passed string command
-as a separate command.
+`shlex.split()` (see [sources](#sources)) in order to run first token of
+the passed string command as a separate command.
 
 ## Project 4B
 
@@ -55,6 +55,7 @@ represents the number of tests, it might be the case that recursion hits
 run. To resolve this problem, I:
 
 1) in .venv/pyvenv.cfg changed `include-system-site-packages` to true
+   (see [sources](#sources) for reference to manual)
 
 2) created .venv/lib/python3.12/site-packages/usercustomize.py file and
    wrote the following code:
@@ -85,4 +86,16 @@ testing dataset size by almost 95% (from 1639 to 86 pngs) without loss
 in effectiveness metrics (such as line coverage). This could be very
 important for the testing step of CI pipeline and safe substantial
 amount of time of the developers.  
+
+## Sources
+
+- <https://docs.python.org/3/library/site.html> - site specific
+  configuration reference, used to increase recursion limit in part 4C 
+
+- <https://docs.python.org/3/library/subprocess.html#popen-constructor>
+  - popen constructor + `shlex.split()` used in part 4A
+
+- <https://myslu.stlawu.edu/~kangstadt/teaching/spring26/340/p4.html> -
+  project 4 description and instructions. If the source is not found
+  here, it is highly likely to be found there
 
